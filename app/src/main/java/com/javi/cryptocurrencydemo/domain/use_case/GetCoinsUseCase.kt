@@ -11,7 +11,7 @@ import javax.inject.Inject
 class GetCoinsUseCase @Inject constructor(
     private val coinRepository: CoinRepository
 ) {
-    suspend operator fun invoke(): Flow<Resource<List<Coin>>> {
+    operator fun invoke(): Flow<Resource<List<Coin>>> {
         return flow {
             emit(Resource.Loading())
             val result = coinRepository.getCoins()

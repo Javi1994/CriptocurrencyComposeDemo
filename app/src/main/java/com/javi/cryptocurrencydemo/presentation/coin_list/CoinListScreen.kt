@@ -11,15 +11,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.javi.cryptocurrencydemo.domain.model.Coin
 import com.javi.cryptocurrencydemo.presentation.coin_list.components.CoinListItem
 
 @Composable
 fun CoinListScreen(
-    //viewModel: CoinListViewModel = hiltViewModel()
+    viewModel: CoinListViewModel = hiltViewModel()
 ) {
-    //val state = viewModel.state.value
+    val state = viewModel.state.value
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -27,7 +28,7 @@ fun CoinListScreen(
             .padding(16.dp)
     ) {
         LazyColumn {
-            items(emptyList<Coin>()) { coin ->
+            items(state.coins) { coin ->
                 CoinListItem(coin = coin)
             }
         }
