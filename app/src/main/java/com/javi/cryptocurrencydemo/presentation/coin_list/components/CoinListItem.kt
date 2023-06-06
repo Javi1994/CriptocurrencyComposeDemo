@@ -1,12 +1,9 @@
 package com.javi.cryptocurrencydemo.presentation.coin_list.components
 
-import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,11 +16,14 @@ import com.javi.cryptocurrencydemo.domain.model.Coin
 
 
 @Composable
-fun CoinListItem(coin: Coin) {
+fun CoinListItem(coin: Coin, onCoinClick: (Coin) -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
+            .clickable {
+                onCoinClick(coin)
+            }
     ) {
         Text(
             modifier = Modifier.align(Alignment.CenterStart),
@@ -43,5 +43,7 @@ fun CoinListItem(coin: Coin) {
 @Preview
 @Composable
 private fun CoinListItemPreview() {
-    CoinListItem(Coin.mock())
+    CoinListItem(Coin.mock()) {
+
+    }
 }

@@ -1,12 +1,8 @@
 package com.javi.cryptocurrencydemo.domain.model
 
 
-import com.google.gson.annotations.SerializedName
-import com.javi.cryptocurrencydemo.data.model.Links
-import com.javi.cryptocurrencydemo.data.model.LinksExtended
 import com.javi.cryptocurrencydemo.data.model.Tag
 import com.javi.cryptocurrencydemo.data.model.TeamMember
-import com.javi.cryptocurrencydemo.data.model.Whitepaper
 
 data class CoinDetail(
     val description: String,
@@ -18,4 +14,26 @@ data class CoinDetail(
     val symbol: String,
     val tags: List<Tag>,
     val teamMembers: List<TeamMember>,
-)
+) {
+    companion object {
+        fun mock(): CoinDetail {
+            return CoinDetail(
+                description = "This is a description",
+                id = "Id",
+                isActive = true,
+                message = "This is a message",
+                name = "MyCoinName",
+                rank = 1,
+                symbol = "MCN",
+                tags = emptyList(),
+                teamMembers = listOf(
+                    TeamMember.mock(),
+                    TeamMember.mock(),
+                    TeamMember.mock(),
+                    TeamMember.mock(),
+                    TeamMember.mock(),
+                )
+            )
+        }
+    }
+}

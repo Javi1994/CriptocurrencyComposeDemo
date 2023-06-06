@@ -14,10 +14,12 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.javi.cryptocurrencydemo.domain.model.Coin
+import com.javi.cryptocurrencydemo.presentation.Screen
 import com.javi.cryptocurrencydemo.presentation.coin_list.components.CoinListItem
 
 @Composable
 fun CoinListScreen(
+    navController: NavController? = null,
     viewModel: CoinListViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
@@ -29,7 +31,9 @@ fun CoinListScreen(
     ) {
         LazyColumn {
             items(state.coins) { coin ->
-                CoinListItem(coin = coin)
+                CoinListItem(coin = coin) {
+                    navController?.navigate(Screen.CoinDetailScreen.route)
+                }
             }
         }
     }
@@ -42,5 +46,5 @@ private fun CoinListScreenPreview() {
     for (i in 1..100) {
         list = list + Coin.mock()
     }
-    //CoinListScreen(list)
+    CoinListScreen()
 }

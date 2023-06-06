@@ -10,4 +10,14 @@ data class TeamMember(
     val name: String,
     @SerializedName("position")
     val position: String
-)
+) {
+    companion object {
+        fun mock(): TeamMember {
+            return TeamMember(
+                id = "Id",
+                name = "Name",
+                position = "Position"
+            )
+        }
+    }
+}
