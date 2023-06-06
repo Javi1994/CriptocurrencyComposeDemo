@@ -2,7 +2,9 @@ package com.javi.cryptocurrencydemo.data.repository
 
 import com.javi.cryptocurrencydemo.common.Resource
 import com.javi.cryptocurrencydemo.data.datasource.remote.CoinService
+import com.javi.cryptocurrencydemo.data.model.CoinDetailDto
 import com.javi.cryptocurrencydemo.data.model.CoinDto
+import com.javi.cryptocurrencydemo.domain.model.CoinDetail
 import com.javi.cryptocurrencydemo.domain.repository.CoinRepository
 import retrofit2.HttpException
 import java.io.IOException
@@ -15,6 +17,16 @@ class CoinRepositoryImpl @Inject constructor(
     override suspend fun getCoins(): Resource<List<CoinDto>> {
         return try {
             Resource.Success(coinService.getCoins())
+        } catch (e: HttpException) {
+            Resource.Error(e.localizedMessage ?: "")
+        } catch (e: IOException) {
+            Resource.Error(e.localizedMessage ?: "")
+        }
+    }
+
+    override suspend fun getCoinDetail(coinId: String): Resource<CoinDetailDto> {
+        return try {
+            Resource.Success(coinService.getCoins(coinId))
         } catch (e: HttpException) {
             Resource.Error(e.localizedMessage ?: "")
         } catch (e: IOException) {
