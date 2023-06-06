@@ -39,21 +39,27 @@ fun CoinDetailScreen(
                 Spacer(modifier = Modifier.size(8.dp))
                 Text(text = coinDetail.description, color = Color.White)
                 Spacer(modifier = Modifier.size(8.dp))
-                Text(
-                    text = "Tags",
-                    color = Color.White,
-                    fontSize = 20.sp,
-                    style = MaterialTheme.typography.bodyLarge
-                )
-                Spacer(modifier = Modifier.size(8.dp))
-                Text(
-                    text = "Team members",
-                    color = Color.White,
-                    fontSize = 20.sp,
-                    style = MaterialTheme.typography.bodyLarge
-                )
-                Spacer(modifier = Modifier.size(16.dp))
-                TeamMembersList(teamMembers = coinDetail.teamMembers)
+
+                if (coinDetail.tags.isNotEmpty()) {
+                    Text(
+                        text = "Tags",
+                        color = Color.White,
+                        fontSize = 20.sp,
+                        style = MaterialTheme.typography.bodyLarge
+                    )
+                    Spacer(modifier = Modifier.size(8.dp))
+                }
+
+                if (coinDetail.teamMembers.isNotEmpty()) {
+                    Text(
+                        text = "Team members",
+                        color = Color.White,
+                        fontSize = 20.sp,
+                        style = MaterialTheme.typography.bodyLarge
+                    )
+                    Spacer(modifier = Modifier.size(16.dp))
+                    TeamMembersList(teamMembers = coinDetail.teamMembers)
+                }
             }
         }
 
