@@ -9,11 +9,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.javi.cryptocurrencydemo.domain.model.Coin
 import com.javi.cryptocurrencydemo.presentation.Screen
 import com.javi.cryptocurrencydemo.presentation.coin_list.components.CoinListItem
 
@@ -32,19 +30,11 @@ fun CoinListScreen(
         LazyColumn {
             items(state.coins) { coin ->
                 CoinListItem(coin = coin) {
-                    navController?.navigate(Screen.CoinDetailScreen.route)
+                    navController?.navigate(
+                        Screen.CoinDetailScreen.route + "/${coin.id}"
+                    )
                 }
             }
         }
     }
-}
-
-@Preview
-@Composable
-private fun CoinListScreenPreview() {
-    var list = emptyList<Coin>()
-    for (i in 1..100) {
-        list = list + Coin.mock()
-    }
-    CoinListScreen()
 }

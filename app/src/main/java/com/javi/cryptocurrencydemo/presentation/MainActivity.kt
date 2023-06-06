@@ -7,7 +7,6 @@ import androidx.activity.viewModels
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.javi.cryptocurrencydemo.domain.model.CoinDetail
 import com.javi.cryptocurrencydemo.presentation.coin_detail.CoinDetailScreen
 import com.javi.cryptocurrencydemo.presentation.coin_list.CoinListScreen
 import com.javi.cryptocurrencydemo.presentation.coin_list.CoinListViewModel
@@ -32,9 +31,9 @@ class MainActivity : ComponentActivity() {
                         CoinListScreen(navController = navController)
                     }
                     composable(
-                        route = Screen.CoinDetailScreen.route
+                        route = Screen.CoinDetailScreen.route + "/{coin_id}"
                     ) {
-                        CoinDetailScreen(CoinDetail.mock())
+                        CoinDetailScreen()
                     }
                 }
             }

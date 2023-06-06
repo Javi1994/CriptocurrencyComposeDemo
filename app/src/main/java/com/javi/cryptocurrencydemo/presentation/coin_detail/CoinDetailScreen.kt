@@ -11,48 +11,43 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.javi.cryptocurrencydemo.domain.model.CoinDetail
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.javi.cryptocurrencydemo.presentation.coin_detail.components.CoinDetailHeader
 import com.javi.cryptocurrencydemo.presentation.coin_detail.components.TeamMembersList
 
 @Composable
 fun CoinDetailScreen(
-    coinDetail: CoinDetail,
-    //viewModel: CoinDetailViewModel = hiltViewModel()
+    viewModel: CoinDetailViewModel = hiltViewModel()
 ) {
+    val state = viewModel.state.value
     Column(
         modifier = Modifier
             .background(Color.Black)
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        CoinDetailHeader(coinDetail)
-        Spacer(modifier = Modifier.size(8.dp))
-        Text(text = coinDetail.description, color = Color.White)
-        Spacer(modifier = Modifier.size(8.dp))
-        Text(
-            text = "Tags",
-            color = Color.White,
-            fontSize = 20.sp,
-            style = MaterialTheme.typography.bodyLarge
-        )
-        Spacer(modifier = Modifier.size(8.dp))
-        Text(
-            text = "Team members",
-            color = Color.White,
-            fontSize = 20.sp,
-            style = MaterialTheme.typography.bodyLarge
-        )
-        Spacer(modifier = Modifier.size(16.dp))
-        TeamMembersList(teamMembers = coinDetail.teamMembers)
+        state.coinDetail?.let { coinDetail ->
+            CoinDetailHeader(coinDetail)
+            Spacer(modifier = Modifier.size(8.dp))
+            Text(text = coinDetail.description, color = Color.White)
+            Spacer(modifier = Modifier.size(8.dp))
+            Text(
+                text = "Tags",
+                color = Color.White,
+                fontSize = 20.sp,
+                style = MaterialTheme.typography.bodyLarge
+            )
+            Spacer(modifier = Modifier.size(8.dp))
+            Text(
+                text = "Team members",
+                color = Color.White,
+                fontSize = 20.sp,
+                style = MaterialTheme.typography.bodyLarge
+            )
+            Spacer(modifier = Modifier.size(16.dp))
+            TeamMembersList(teamMembers = coinDetail.teamMembers)
+        }
     }
-}
-
-@Preview
-@Composable
-private fun CoinDetailScreenPreview() {
-    CoinDetailScreen(CoinDetail.mock())
 }
