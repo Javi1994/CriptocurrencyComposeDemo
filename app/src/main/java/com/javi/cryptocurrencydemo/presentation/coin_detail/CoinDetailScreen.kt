@@ -1,25 +1,22 @@
 package com.javi.cryptocurrencydemo.presentation.coin_detail
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.javi.cryptocurrencydemo.domain.model.CoinDetail
-import com.javi.cryptocurrencydemo.presentation.coin_detail.components.TeamMemberListItem
+import com.javi.cryptocurrencydemo.presentation.coin_detail.components.CoinDetailHeader
+import com.javi.cryptocurrencydemo.presentation.coin_detail.components.TeamMembersList
 
 @Composable
 fun CoinDetailScreen(
@@ -36,41 +33,26 @@ fun CoinDetailScreen(
         Spacer(modifier = Modifier.size(8.dp))
         Text(text = coinDetail.description, color = Color.White)
         Spacer(modifier = Modifier.size(8.dp))
-        Text(text = "Tags", color = Color.White)
-        Spacer(modifier = Modifier.size(8.dp))
-        Text(text = "Team members", color = Color.White)
-        Spacer(modifier = Modifier.size(8.dp))
-        LazyColumn {
-            items(coinDetail.teamMembers) { teamMember ->
-                TeamMemberListItem(teamMember = teamMember)
-            }
-        }
-    }
-}
-
-@Composable
-fun CoinDetailHeader(coinDetail: CoinDetail) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-    ) {
         Text(
-            modifier = Modifier.align(Alignment.CenterStart),
-            text = "${coinDetail.rank}. ${coinDetail.name}  (${coinDetail.symbol})",
-            color = Color.White
+            text = "Tags",
+            color = Color.White,
+            fontSize = 20.sp,
+            style = MaterialTheme.typography.bodyLarge
         )
+        Spacer(modifier = Modifier.size(8.dp))
         Text(
-            modifier = Modifier
-                .align(Alignment.CenterEnd),
-            text = if (coinDetail.isActive) "active" else "disabled",
-            color = if (coinDetail.isActive) Color.Yellow else Color.Red,
-            fontStyle = FontStyle.Italic
+            text = "Team members",
+            color = Color.White,
+            fontSize = 20.sp,
+            style = MaterialTheme.typography.bodyLarge
         )
+        Spacer(modifier = Modifier.size(16.dp))
+        TeamMembersList(teamMembers = coinDetail.teamMembers)
     }
 }
 
 @Preview
 @Composable
-fun CoinDetailScreenPreview() {
+private fun CoinDetailScreenPreview() {
     CoinDetailScreen(CoinDetail.mock())
 }
