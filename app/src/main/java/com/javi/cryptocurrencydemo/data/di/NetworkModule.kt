@@ -9,6 +9,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -17,6 +18,7 @@ object NetworkModule {
     private const val BASE_URL = "https://api.coinpaprika.com/"
 
     @Provides
+    @Singleton
     fun provideRetrofitClient(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -26,6 +28,7 @@ object NetworkModule {
     }
 
     @Provides
+    @Singleton
     fun provideOkHttpClient(): OkHttpClient {
         val logging = HttpLoggingInterceptor()
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -36,6 +39,7 @@ object NetworkModule {
     }
 
     @Provides
+    @Singleton
     fun provideCoinService(retrofit: Retrofit): CoinService {
         return retrofit.create(CoinService::class.java)
     }
